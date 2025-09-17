@@ -1,9 +1,51 @@
+import matrix.*
 
 
-describe "group of tests " {
+describe "Tests de Matrix" {
 
-  test "test 01" {
-    assert.equals(100, 50+50)
+  test "Cuántos pasajeros hay" {
+    nave.abordar(neo)
+    nave.abordar(morfeo)
+    nave.abordar(trinity)
+    assert.equals(nave.cantidadDePasajeros(), 3)
+  }
+  test "El pasajero con más vitalidad" {
+    nave.abordar(neo)
+    nave.abordar(morfeo)
+    nave.abordar(trinity)
+    assert.equals(nave.pasajeroConMasVitalidad(), neo)
   }
 
+  test "Si está equilibrada en vitalidad, lo que sucede cuando ninguno de los pasajeros tiene más que el doble de vitalidad que cualquier otro pasajero." {
+    nave.abordar(neo)
+    nave.abordar(morfeo) 
+    assert.that(nave.estaEquilibrada())
+  }
+
+  test "La nave no está equilibrada si hay mucha diferencia de vitalidad" {
+  nave.abordar(neo)
+  nave.abordar(trinity)
+  assert.notThat(nave.estaEquilibrada())
+}
+
+  test "Si el elegido está en la nave" {
+    nave.abordar(neo)
+    nave.abordar(morfeo) 
+    assert.that(nave.elElegidoEstaABordo())
+  }
+
+  test "Cuando la nave choca, todos sus pasajeros saltan para salvarse y se van de la nave." {
+    nave.abordar(neo)
+    nave.abordar(morfeo) 
+    nave.chocar()
+    assert.equals(nave.cantidadDePasajeros(), 0)
+  }
+
+  test "Cuando la nave acelera, todos sus pasajeros, excepto el elegido, saltan de alegría y permanecen en la nave." {
+    nave.abordar(neo)
+    nave.abordar(morfeo)
+    nave.abordar(trinity)
+    nave.acelerar()
+    assert.equals(nave.pasajeroConMasVitalidad(), neo) //Al saltar siempre tendrá más vitalidad
+  }
 }
